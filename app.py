@@ -255,10 +255,16 @@ class RecipeManager:
 
     def view_recipes(self):
         if not self.recipes:
-            return "No recipes available."
+            return []
         else:
-            recipe_list = [f"{i}. {recipe['name']}" for i, recipe in enumerate(self.recipes, start=1)]
-            return "\n".join(recipe_list)
+            return [
+                {
+                    'name': recipe['name'],
+                    'ingredients': (recipe['ingredients']),
+                    'instructions': recipe['instructions']
+                }
+                for recipe in self.recipes
+            ]
 
     def search_recipes(self, ingredient):
         matching_recipes = []
